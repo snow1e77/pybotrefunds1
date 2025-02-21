@@ -58,7 +58,7 @@ def get_main_menu_keyboard():
         [InlineKeyboardButton("❌ НЕ Сможем помочь -", callback_data="reject")],
         [InlineKeyboardButton("💬 Не нашел ответа", callback_data="contact")],
         [InlineKeyboardButton("МЫ НА ОЗОН", url="https://www.ozon.ru/seller/titan-style-1468753/products/?miniapp=seller_1468753")],
-        [InlineKeyboardButton("МЫ НА ВБ", url="https://www.wildberries.ru/catalog/0/search.aspx?page=1&sort=rate&search=titan+style")]
+        [InlineKeyboardButton("МЫ НА ВБ", url="https://www.wildberries.ru/brands/310806956-titan-style/galstuki")]
     ]
     return InlineKeyboardMarkup(keyboard)
 
