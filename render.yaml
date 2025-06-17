@@ -1,13 +1,11 @@
 services:
-  - type: background_worker        # для long-running polling-бота
+  - type: worker            # ← исправили
     name: pybotrefunds1
-    env: python
-    plan: starter                  # free-тарифов для background_worker нет
-    region: frankfurt              # ближе к России — меньше пинга
-    buildCommand: |
-      pip install -r requirements.txt
-    startCommand: |
-      python bot1.py               # или другой entry-point
+    runtime: python         # заменяет устаревшее env: python
+    plan: free
+    region: frankfurt
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot1.py
     envVars:
-      - key: BOT_TOKEN             # переменные задашь в Dashboard
-        sync: false
+      - key: BOT_TOKEN
+        sync: false         # задашь значение в Dashboard
