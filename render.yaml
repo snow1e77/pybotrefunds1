@@ -2,15 +2,15 @@ services:
   - type: web
     name: refunds-bot
     runtime: python
-    plan: free          # теперь можно free
+    plan: free
     region: frankfurt
     buildCommand: pip install -r requirements.txt
     startCommand: python bot_webhook.py
     autoDeploy: true
-    healthCheckPath: /
+
     envVars:
-      - key: BOT_TOKEN      # задашь в Dashboard ➜ Environment
+      - key: BOT_TOKEN        # значение зададите в Dashboard
         sync: false
-      - key: WEBHOOK_HOST   # https://refunds-bot.onrender.com (пример)
-        value: ""           # можно оставить пустым и прописать позже
-        sync: false
+
+      - key: WEBHOOK_HOST     # https://refunds-bot.onrender.com
+        sync: false           # value убрали, чтобы не было конфликта
