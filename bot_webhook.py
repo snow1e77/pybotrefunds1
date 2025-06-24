@@ -27,7 +27,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-TOKEN = os.environ["BOT_TOKEN"]  # Telegram bot token
+TOKEN = os.environ["7717953296:AAEg0JAb387eQvyx2SkFQ3p15i9YS_WzsfY"]  # Telegram bot token
 OPERATOR_CHAT_ID = int(os.environ.get("OPERATOR_CHAT_ID", "1138693316"))
 
 # For webhook hosting on Render
