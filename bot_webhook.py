@@ -22,12 +22,12 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Secrets are supplied via environment variables -> Render Dashboard ➜ Environment
-TOKEN = os.environ["BOT_TOKEN"]                       # Telegram bot token
+TOKEN = os.environ["BOT_TOKEN"]  # Telegram bot token
 OPERATOR_CHAT_ID = int(os.environ.get("OPERATOR_CHAT_ID", "1138693316"))
 
 # For webhook hosting on Render
-WEBHOOK_HOST = os.environ["WEBHOOK_HOST"]             # e.g. https://refunds-bot.onrender.com
-PORT = int(os.environ.get("PORT", 10000))             # Render passes chosen port here
+WEBHOOK_HOST = os.environ["WEBHOOK_HOST"]  # e.g. https://refunds-bot.onrender.com
+PORT = int(os.environ.get("PORT", 10000))  # Render passes chosen port here
 WEBHOOK_PATH = f"/{TOKEN}"
 WEBHOOK_URL = f"{WEBHOOK_HOST}{WEBHOOK_PATH}"
 
@@ -45,15 +45,13 @@ MAIN_MENU_PHOTO_URL = "https://i.imgur.com/451wLeS.png"
 MAIN_MENU_TEXT = (
     "Ниже расположено меню с типовыми ситуациями.\n"
     "Пожалуйста ознакомьтесь, нажав на соответствующую кнопку.\n\n"
-    "Если мы решили Ваш вопрос, просим поставить ★★★★★ или скорректировать оценку, "
-    "либо дополнить отзыв.\n"
+    "Если мы решили Ваш вопрос, просим поставить ★★★★★ или скорректировать оценку, либо дополнить отзыв.\n"
     "С Уважением, TITAN STYLE!"
 )
 
 CONTACT_TEXT = (
     "Если вы не нашли ответа на свой вопрос:\n"
-    "Опишите, пожалуйста, проблему текстом ниже и прикрепите фото или видео товара, если это необходимо "
-    "[ОБЯЗАТЕЛЬНО вместе с текстом].\n"
+    "Опишите, пожалуйста, проблему текстом ниже и прикрепите фото или видео товара, если это необходимо [ОБЯЗАТЕЛЬНО вместе с текстом].\n"
     "(Также желательно указать время оформления заявки на возврат или заказа товара, а также номер Заказа.)\n\n"
     "Вскоре с вами свяжется специалист гарантийной службы."
 )
@@ -72,6 +70,7 @@ def get_main_menu_keyboard() -> InlineKeyboardMarkup:
     ]
     return InlineKeyboardMarkup(keyboard)
 
+
 def get_nav_keyboard() -> InlineKeyboardMarkup:
     keyboard = [
         [
@@ -80,6 +79,7 @@ def get_nav_keyboard() -> InlineKeyboardMarkup:
         ]
     ]
     return InlineKeyboardMarkup(keyboard)
+
 
 def get_continue_keyboard() -> InlineKeyboardMarkup:
     keyboard = [
@@ -90,10 +90,12 @@ def get_continue_keyboard() -> InlineKeyboardMarkup:
     ]
     return InlineKeyboardMarkup(keyboard)
 
+
 def admin_reply_button(user_id: int) -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(
         [[InlineKeyboardButton("Ответить", callback_data=f"admin_reply_{user_id}")]]
     )
+
 
 def user_reply_button() -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(
@@ -111,6 +113,7 @@ async def start_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         parse_mode="HTML",
         reply_markup=get_main_menu_keyboard(),
     )
+
 
 # ---------- Common button dispatcher ----------
 
@@ -182,6 +185,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     return ConversationHandler.END
 
+
 # ---------- ASK_QUESTION state handlers ----------
 
 async def text_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -189,8 +193,7 @@ async def text_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_text = update.message.text
 
     message_text = (
-        f"Обращение от: {user.first_name} {user.last_name or ''} "
-        f"(@{user.username or 'нет'})\n"
+        f"Обращение от: {user.first_name} {user.last_name or ''} (@{user.username or 'нет'})\n"
         f"User ID: {user.id}\n\n"
         f"Сообщение: {user_text}"
     )
@@ -209,12 +212,12 @@ async def text_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
     return ASK_QUESTION
 
+
 async def attachment_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Документы / фото / видео в ASK_QUESTION."""
     user = update.message.from_user
     user_info = (
-        f"Обращение от: {user.first_name} {user.last_name or ''} "
-        f"(@{user.username or 'нет'})\n"
+        f"Обращение от: {user.first_name} {user.last_name or ''} (@{user.username or 'нет'})\n"
         f"User ID: {user.id}\n"
     )
 
@@ -239,13 +242,4 @@ async def attachment_handler(update: Update, context: ContextTypes.DEFAULT_TYPE)
             message_id=update.message.message_id,
         )
         await context.bot.send_message(
-            chat_id=OPERATOR_CHAT_ID,
-            text=user_info + "Пользователь отправил фото.",
-            parse_mode="HTML",
-            reply_markup=admin_reply_button(user.id),
-        )
-
-    elif update.message.video:
-        await context.bot.forward_message(
-            chat_id=OPERATOR_CHAT_ID,
-            from_chat
+            chat_id
