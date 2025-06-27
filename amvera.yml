@@ -1,0 +1,17 @@
+meta:
+  environment: python
+  toolchain:
+    name: pip
+    version: 3.10
+
+build:
+  # путь к файлу зависимостей (по умолчанию просто requirements.txt)
+  requirementsPath: requirements.txt
+
+run:
+  # точка входа в приложение
+  scriptName: bot_webhook.py
+  # каталог постоянного хранилища (например, для логов или загружаемых пользователями файлов)
+  persistenceMount: /data
+  # порт, на котором Amvera проксирует HTTP-запросы (для webhook)
+  containerPort: 80
