@@ -24,7 +24,6 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 OPERATOR_CHAT_ID = 1138693316  # ID администратора (куда пересылаются сообщения)
-BOT_TOKEN = "7717953296:AAEg0JAb387eQvyx2SkFQ3p15i9YS_WzsfY"  # Ваш токен
 
 # Состояния для ConversationHandler:
 ASK_QUESTION = 1     # Основное состояние для сообщений пользователей ("Не нашел ответа")
