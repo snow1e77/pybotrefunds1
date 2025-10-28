@@ -30,7 +30,7 @@ ASK_QUESTION = 1     # Основное состояние для сообщен
 ADMIN_REPLY = 11     # Мини-диалог: админ отвечает пользователю
 USER_REPLY = 12      # Мини-диалог: пользователь отвечает админу
 
-MAIN_MENU_PHOTO_URL = "https://i.imgur.com/451wLeS.png"
+MAIN_MENU_PHOTO_URL = "https://ibb.co/MDyvMRTQ"
 MAIN_MENU_TEXT = (
     "Ниже расположено меню с типовыми ситуациями. Пожалуйста ознакомьтесь, "
     "нажав на соответствующую кнопку.\n\n"
@@ -108,8 +108,8 @@ async def start_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """
     Обработка основных кнопок меню:
-      - "approve": отправляем фото https://i.imgur.com/ZLQxRGb.png;
-      - "reject": отправляем фото https://i.imgur.com/IxAb3Pu.png;
+      - "approve": отправляем фото https://ibb.co/BHqVL4mM;
+      - "reject": отправляем фото https://ibb.co/zV00BTwN;
       - "contact": отправляем инструкцию CONTACT_TEXT и переходим в состояние ASK_QUESTION;
       - "back"/"main_menu": отправляем фото главного меню;
       - "add_more": оставляем диалог открытым;
@@ -126,14 +126,14 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if data == "approve":
         await query.message.chat.send_photo(
-            photo="https://i.imgur.com/ZLQxRGb.png",
+            photo="https://ibb.co/BHqVL4mM",
             reply_markup=get_nav_keyboard()
         )
         return ASK_QUESTION
 
     elif data == "reject":
         await query.message.chat.send_photo(
-            photo="https://i.imgur.com/IxAb3Pu.png",
+            photo="https://ibb.co/zV00BTwN",
             reply_markup=get_nav_keyboard()
         )
         return ConversationHandler.END
